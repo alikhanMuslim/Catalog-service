@@ -11,6 +11,7 @@ SELECT * FROM authors
 WHERE id = $1 LIMIT 1;
 
 
+
 -- name: UpdateAuthor :one
 UPDATE authors
   set bio = $2

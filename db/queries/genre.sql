@@ -6,7 +6,6 @@ INSERT INTO genres (
 )
 RETURNING *;
 
-
 -- name: GetGenre :one
 SELECT * FROM genres
 WHERE id = $1 LIMIT 1;
