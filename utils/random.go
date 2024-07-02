@@ -14,7 +14,7 @@ func RandomGenre() string {
 	return name
 }
 
-func RandomString(n int) string {
+func randomString(n int) string {
 	var sb strings.Builder
 	k := len(alphabet)
 
@@ -24,10 +24,25 @@ func RandomString(n int) string {
 	return sb.String()
 }
 
-func RandomBook() string {
-	return RandomString(10)
+func RandomTitle() string {
+	return randomString(10)
+}
+
+func RandomPrice(min, max int) int {
+
+	return min + rand.Intn(max-min+1)
+}
+
+func RandomBool() bool {
+	bools := []bool{true, false}
+
+	return bools[rand.Intn(len(bools))]
+}
+
+func RandomBio() string {
+	return randomString(50)
 }
 
 func RandomName() string {
-	return RandomString(6)
+	return randomString(6)
 }

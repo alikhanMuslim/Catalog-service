@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createBook = `-- name: CreateBook :one
@@ -20,11 +19,11 @@ RETURNING id, title, author_id, genre_id, price, available, created_at
 `
 
 type CreateBookParams struct {
-	Title     string        `json:"title"`
-	AuthorID  sql.NullInt64 `json:"author_id"`
-	GenreID   sql.NullInt64 `json:"genre_id"`
-	Price     string        `json:"price"`
-	Available bool          `json:"available"`
+	Title     string `json:"title"`
+	AuthorID  int64  `json:"author_id"`
+	GenreID   int64  `json:"genre_id"`
+	Price     int64  `json:"price"`
+	Available bool   `json:"available"`
 }
 
 func (q *Queries) CreateBook(ctx context.Context, arg CreateBookParams) (Book, error) {
@@ -122,9 +121,9 @@ RETURNING id, title, author_id, genre_id, price, available, created_at
 `
 
 type UpdateBookParams struct {
-	ID        int64  `json:"id"`
-	Price     string `json:"price"`
-	Available bool   `json:"available"`
+	ID        int64 `json:"id"`
+	Price     int64 `json:"price"`
+	Available bool  `json:"available"`
 }
 
 func (q *Queries) UpdateBook(ctx context.Context, arg UpdateBookParams) (Book, error) {

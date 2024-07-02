@@ -5,24 +5,23 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
 type Author struct {
-	ID   int64          `json:"id"`
-	Name string         `json:"name"`
-	Bio  sql.NullString `json:"bio"`
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Bio  string `json:"bio"`
 }
 
 type Book struct {
-	ID        int64         `json:"id"`
-	Title     string        `json:"title"`
-	AuthorID  sql.NullInt64 `json:"author_id"`
-	GenreID   sql.NullInt64 `json:"genre_id"`
-	Price     string        `json:"price"`
-	Available bool          `json:"available"`
-	CreatedAt time.Time     `json:"created_at"`
+	ID        int64     `json:"id"`
+	Title     string    `json:"title"`
+	AuthorID  int64     `json:"author_id"`
+	GenreID   int64     `json:"genre_id"`
+	Price     int64     `json:"price"`
+	Available bool      `json:"available"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type Genre struct {

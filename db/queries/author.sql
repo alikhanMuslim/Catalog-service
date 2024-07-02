@@ -25,4 +25,6 @@ WHERE id = $1;
 
 -- name: ListAuthors :many
 SELECT * FROM authors
-ORDER BY id;
+ORDER BY id
+LIMIT $1
+OFFSET $2;

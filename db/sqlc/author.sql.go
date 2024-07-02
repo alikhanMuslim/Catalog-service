@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createAuthor = `-- name: CreateAuthor :one
@@ -20,8 +19,8 @@ RETURNING id, name, bio
 `
 
 type CreateAuthorParams struct {
-	Name string         `json:"name"`
-	Bio  sql.NullString `json:"bio"`
+	Name string `json:"name"`
+	Bio  string `json:"bio"`
 }
 
 func (q *Queries) CreateAuthor(ctx context.Context, arg CreateAuthorParams) (Author, error) {
@@ -56,10 +55,17 @@ func (q *Queries) GetAuthor(ctx context.Context, id int64) (Author, error) {
 const listAuthors = `-- name: ListAuthors :many
 SELECT id, name, bio FROM authors
 ORDER BY id
+LIMIT $1
+OFFSET $2
 `
 
-func (q *Queries) ListAuthors(ctx context.Context) ([]Author, error) {
-	rows, err := q.db.QueryContext(ctx, listAuthors)
+type ListAuthorsParams struct {
+	Limit  int32 `json:"limit"`
+	Offset int32 `json:"offset"`
+}
+
+func (q *Queries) ListAuthors(ctx context.Context, arg ListAuthorsParams) ([]Author, error) {
+	rows, err := q.db.QueryContext(ctx, listAuthors, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
@@ -89,8 +95,8 @@ RETURNING id, name, bio
 `
 
 type UpdateAuthorParams struct {
-	ID  int64          `json:"id"`
-	Bio sql.NullString `json:"bio"`
+	ID  int64  `json:"id"`
+	Bio string `json:"bio"`
 }
 
 func (q *Queries) UpdateAuthor(ctx context.Context, arg UpdateAuthorParams) (Author, error) {
