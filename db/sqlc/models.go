@@ -5,6 +5,7 @@
 package db
 
 import (
+	"database/sql"
 	"time"
 )
 
@@ -27,4 +28,13 @@ type Book struct {
 type Genre struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
+}
+
+type User struct {
+	ID           int64          `json:"id"`
+	Username     string         `json:"username"`
+	PasswordHash string         `json:"password_hash"`
+	Email        string         `json:"email"`
+	Token        sql.NullString `json:"token"`
+	CreatedAt    time.Time      `json:"created_at"`
 }

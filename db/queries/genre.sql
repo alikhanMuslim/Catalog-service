@@ -24,5 +24,4 @@ RETURNING *;
 
 -- name: ListGenres :many
 SELECT * FROM genres
-ORDER BY id
-LIMIT $1;
+ORDER BY id;

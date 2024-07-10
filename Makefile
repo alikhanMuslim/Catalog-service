@@ -12,5 +12,8 @@ migrateup:
 
 migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/catalog_service?sslmode=disable" -verbose down
+	
+server:
+	go run main.go
 
-.PHONY: postgres createdb dropdb
+.PHONY: postgres createdb dropdb migrateup migratedown

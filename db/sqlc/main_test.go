@@ -6,8 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/joho/godotenv"
-
+	"github.com/alikhanMuslim/Catalog-service/utils"
 	_ "github.com/lib/pq"
 )
 
@@ -24,13 +23,12 @@ func TestMain(m *testing.M) {
 
 func SetupTestDb() error {
 
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+	config, err := utils.LoadConfig("../..")
+	if err != nil {
+		log.Fatal("cannot load config")
 	}
 
-	dbURL := os.Getenv("DB_URL")
-
-	conn, err := sql.Open("postgres", dbURL)
+	conn, err := sql.Open(config.DriverName, config.DriveSource)
 
 	if err != nil {
 		return err

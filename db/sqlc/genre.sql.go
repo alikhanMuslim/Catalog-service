@@ -50,11 +50,10 @@ func (q *Queries) GetGenre(ctx context.Context, id int64) (Genre, error) {
 const listGenres = `-- name: ListGenres :many
 SELECT id, name FROM genres
 ORDER BY id
-LIMIT $1
 `
 
-func (q *Queries) ListGenres(ctx context.Context, limit int32) ([]Genre, error) {
-	rows, err := q.db.QueryContext(ctx, listGenres, limit)
+func (q *Queries) ListGenres(ctx context.Context) ([]Genre, error) {
+	rows, err := q.db.QueryContext(ctx, listGenres)
 	if err != nil {
 		return nil, err
 	}

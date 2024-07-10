@@ -44,7 +44,7 @@ func TestListGenres(t *testing.T) {
 		CreateRandomGenre(t)
 	}
 
-	genres, err := testqueries.ListGenres(context.Background(), 5)
+	genres, err := testqueries.ListGenres(context.Background())
 
 	require.NoError(t, err)
 	require.NotEmpty(t, genres)
